@@ -9,4 +9,4 @@ bower install
 
 node node_modules\http-server\bin\http-server
 
-Then visit http://localhost:8080/
+Then [click](http://localhost:8080/)

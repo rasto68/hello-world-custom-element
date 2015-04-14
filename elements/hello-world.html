@@ -9,32 +9,37 @@
 
     See https://www.polymer-project.org/0.5/docs/start/creatingelements.html for more details
 -->
-<polymer-element name="hello-world" attributes="colour">
-    <template>
-        <!-- This styling will ONLY apply within the custom element, it won't affect any 'h1' elements
-             in the 'exterior' DOM -->
-        <style>
-            h1 {
-                font-style: normal;
-                font-weight: normal;
-                background-color: white;
-            }
-        </style>
+<dom-module id="hello-world" attributes="colour">
+    <!-- This styling will ONLY apply within the custom element, it won't affect any 'h1' elements
+         in the 'exterior' DOM -->
+    <style>
+        h1 {
+            font-style: normal;
+            font-weight: normal;
+            background-color: white;
+        }
+    </style>
 
+    <template>
         <!-- This defines the content of the custom element, {{colour}} is bound to the value
              of the 'colour' attribute defined below (and exposed in the attributes field above) -->
-        <h1 id="greeting" _style="color: {{colour}}">Hello World !</h1>
+        <h1 id="greeting" style$=" {{colour}}">Hello World !</h1>
     </template>
-
-    <script>
-        // Calling 'Polymer' is only required if we want to provide an API on top of the
-        // standard element features (and to make use of custom element life cyles)
-        Polymer({
-            // Add a new method that will
-            goodbye: function () {
-                this.$.greeting.textContent = "Goodbye !";
-            },
-            colour: "red"
-        });
-    </script>
-</polymer-element>
+</dom-module>
+<script>
+    // Calling 'Polymer' is only required if we want to provide an API on top of the
+    // standard element features (and to make use of custom element life cyles)
+    Polymer({
+        is: "hello-world",
+        properties: {
+            colour: {
+                type: String,
+                value: "red"
+            }
+        },
+        // Add a new method that will
+        goodbye: function () {
+            this.$.greeting.textContent = "Goodbye !";
+        }
+    });
+</script>

@@ -8,3 +8,5 @@ npm install
 bower install
 
 node node_modules\http-server\bin\http-server
+
+Then visit http://localhost:8080/

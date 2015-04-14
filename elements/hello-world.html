@@ -23,7 +23,7 @@
     <template>
         <!-- This defines the content of the custom element, {{colour}} is bound to the value
              of the 'colour' attribute defined below (and exposed in the attributes field above) -->
-        <h1 id="greeting" style$=" {{colour}}">Hello World !</h1>
+        <h1 id="greeting" style$="[[colorStyle(colour)]]">Hello World !</h1>
     </template>
 </dom-module>
 <script>
@@ -36,6 +36,9 @@
                 type: String,
                 value: "red"
             }
+        },
+        colorStyle: function (colour) {
+            return "color:" + colour;
         },
         // Add a new method that will
         goodbye: function () {

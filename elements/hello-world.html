@@ -1,0 +1,40 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<!--
+    The 'name' field controls what tag our custom element will have, this must include a '-'
+    character to be a valid custom element
+
+    The 'attributes' field controls which properties of the custom element will be exposed
+    for the new tag, so in this case the user can create a tag with <hello-world colour="pink"/>
+
+    See https://www.polymer-project.org/0.5/docs/start/creatingelements.html for more details
+-->
+<polymer-element name="hello-world" attributes="colour">
+    <template>
+        <!-- This styling will ONLY apply within the custom element, it won't affect any 'h1' elements
+             in the 'exterior' DOM -->
+        <style>
+            h1 {
+                font-weight: normal;
+                background-color: white;
+                z-index: 9999;
+            }
+        </style>
+
+        <!-- This defines the content of the custom element, {{colour}} is bound to the value
+             of the 'colour' attribute defined below (and exposed in the attributes field above) -->
+        <h1 id="greeting" _style="color: {{colour}}">Hello World !</h1>
+    </template>
+
+    <script>
+        // Calling 'Polymer' is only required if we want to provide an API on top of the
+        // standard element features (and to make use of custom element life cyles)
+        Polymer({
+            // Add a new method that will
+            goodbye: function () {
+                this.$.greeting.textContent = "Goodbye !";
+            },
+            colour: "red"
+        });
+    </script>
+</polymer-element>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <!-- See https://www.polymer-project.org/0.5/docs/start/creatingelements.html for more details -->
+    <head>
+        <!-- 1. Load platform support before any code that touches the DOM. -->
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <!-- 2. Load the component using an HTML Import -->
+        <link rel="import" href="elements/hello-world.html">
+
+        <!-- Some styling to demonstrate Shadow DOM bleed --><area></area>
+        <style>
+            /* If you comment out this styling, then the exterior CSS will 'bleed'
+               through into the custom element when using IE and Firefox as they
+               don't natively support Shadow DOM yet */
+            h1 {
+                font-style: italic;
+                color: blue;
+                background-color: yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Will be styled as per the styling above -->
+        <h1>Styled Header</h1>
+
+        <!-- Should be styled accoriding to the custom element definition -->
+        <hello-world id="helloWorld"/>
+
+        <!-- Demonstrate that the custom element has an API -->
+        <script type="text/javascript">
+            var helloWorld = document.querySelector("#helloWorld");
+
+            // The custom element has a 'goodbye' method, call this after a short delay
+            setTimeout(function () {
+                helloWorld.goodbye();
+            }, 5000);
+        </script>
+    </body>
+</html>

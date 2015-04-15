@@ -1,18 +1,18 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <!--
-    The 'name' field controls what tag our custom element will have, this must include a '-'
+    The 'id' field controls what tag our custom element will have, this must include a '-'
     character to be a valid custom element
 
-    The 'attributes' field controls which properties of the custom element will be exposed
-    for the new tag, so in this case the user can create a tag with <hello-world colour="pink"/>
-
-    See https://www.polymer-project.org/0.5/docs/start/creatingelements.html for more details
+    See https://www.polymer-project.org/0.8/ for more details
 -->
-<dom-module id="hello-world" attributes="colour">
+<dom-module id="hello-world">
     <!-- This styling will ONLY apply within the custom element, it won't affect any 'h1' elements
          in the 'exterior' DOM -->
     <style>
+        /* If you comment out this styling, then the exterior CSS will 'bleed'
+           through into the custom element when using IE and Firefox as they
+           don't natively support Shadow DOM yet */
         h1 {
             font-style: normal;
             font-weight: normal;
@@ -21,26 +21,30 @@
     </style>
 
     <template>
-        <!-- This defines the content of the custom element, {{colour}} is bound to the value
-             of the 'colour' attribute defined below (and exposed in the attributes field above) -->
+        <!-- This defines the content of the custom element, [[colorStyle(colour)]] will call the function
+             defined below to set the foreground colour of the element -->
         <h1 id="greeting" style$="[[colorStyle(colour)]]">Hello World !</h1>
     </template>
 </dom-module>
 <script>
-    // Calling 'Polymer' is only required if we want to provide an API on top of the
-    // standard element features (and to make use of custom element life cyles)
     Polymer({
+        // 'is' must match the 'id' specified above
         is: "hello-world",
+        // Define the properties that the element will provide, default to one way binding (see polymer docs
+        // for a description of how to do two way)
         properties: {
             colour: {
                 type: String,
                 value: "red"
             }
         },
+        // A helper method used by the 'template' above.
+        // Unfortunately this seems to be the only place that you can specify such methods which means they
+        // become part of the visible API :(
         colorStyle: function (colour) {
             return "color:" + colour;
         },
-        // Add a new method that will
+        // Add a new method that will change the text of our element
         goodbye: function () {
             this.$.greeting.textContent = "Goodbye !";
         }

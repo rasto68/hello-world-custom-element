@@ -23,7 +23,7 @@
     <template>
         <!-- This defines the content of the custom element, [[colorStyle(colour)]] will call the function
              defined below to set the foreground colour of the element -->
-        <h1 id="greeting" style$="[[colorStyle(colour)]]">Hello World !</h1>
+        <h1 id="greeting" style$="[[_colorStyle(colour)]]">Hello World !</h1>
     </template>
 </dom-module>
 <script>
@@ -41,7 +41,8 @@
         // A helper method used by the 'template' above.
         // Unfortunately this seems to be the only place that you can specify such methods which means they
         // become part of the visible API :(
-        colorStyle: function (colour) {
+        // Prefixing the method name with a '_' gives a hint that this is a private method
+        _colorStyle: function (colour) {
             return "color:" + colour;
         },
         // Add a new method that will change the text of our element
